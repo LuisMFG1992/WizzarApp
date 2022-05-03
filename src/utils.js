@@ -35,6 +35,7 @@ const getAttacks = (stock, colorArr, attacksArr) => {
   if (totalAttacks > 0) {
     getAttacks(stock, colorArr, attacksArr);
   } else {
+    console.log("attacksArr: ", attacksArr);
     console.log("Done.");
   }
 };
