@@ -9,58 +9,32 @@ export const getCombinations = (stock) => {
   const copyStock = { ...stock };
   const colors = ["red", "blue", "green", "yellow", "grey"];
   const attacks = [];
-  const attack = [];
 
-  outterFor(copyStock, colors, attacks, attack);
+  getAttacks(copyStock, colors, attacks);
 };
 
-const outterFor = (copystock, colorArr, attacksArr, singleAttackArr) => {
-  let totalAttacks = Math.max(...Object.values(copystock));
+const getAttacks = (stock, colorArr, attacksArr) => {
+  const attack = [];
+  let totalAttacks = Math.max(...Object.values(stock));
 
-  for (let i = 0; i < colorArr.length; i++) {
-    let cantidad = copystock[colorArr[i]];
-    if (cantidad > 0) {
-      let color = colorArr[i];
-      singleAttackArr.push(color);
-      copystock[color] -= 1;
+  // Se usa i >= 5 pq siempre seran 5 colores
+  for (let i = 0; i <= 5; i++) {
+    let color = colorArr[i];
+    let quantity = stock[color];
+    if (quantity > 0) {
+      attack.push(color);
+      stock[color] -= 1;
     } else {
-      delete copystock[colorArr[i]];
+      delete stock[colorArr[i]];
       totalAttacks -= 1;
     }
   }
-  attacksArr.push(singleAttackArr);
-  console.log("attacksArr: ", attacksArr);
 
-  // toDo: Por alguna razon en la se me daña el aray cuando llamo a innerFor la 2da vez
+  attacksArr.push(attack);
 
-  // if (totalAttacks > 0) {
-  //   outterFor(copystock, colorArr, attacksArr, singleAttackArr);
-  // } else {
-  //   console.log("Se usaron todas las posiones.");
-  // }
+  if (totalAttacks > 0) {
+    getAttacks(stock, colorArr, attacksArr);
+  } else {
+    console.log("Done.");
+  }
 };
-
-//BACK UP
-// export const getCombinations = (stock) => {
-//   const colors = ["red", "blue", "green", "yellow", "grey"];
-//   const copyStock = { ...stock };
-//   let totalAttacks = Math.max(...Object.values(stock));
-
-//   const attacks = [];
-//   const attack = [];
-
-//   for (let i = 0; i < colors.length; i++) {
-//     let potion = copyStock[colors[i]];
-//     if (potion > 0) {
-//       attack.push(colors[i]);
-//       copyStock[colors[i]] -= 1;
-//     } else {
-//       delete copyStock[colors[i]];
-//     }
-//   }
-//   attacks.push(attack);
-
-//   console.log("stock: ", stock);
-//   console.log("copyStock:", copyStock);
-//   console.log("attacks: ", attacks);
-// };

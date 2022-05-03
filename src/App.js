@@ -2,7 +2,7 @@ import "./App.css";
 import { countPotionsColors, getCombinations } from "./utils";
 
 function App() {
-  const potions = ["blue", "green", "yellow", "grey", "blue"];
+  const potions = ["blue", "green"];
 
   const stock = {
     red: 0,
