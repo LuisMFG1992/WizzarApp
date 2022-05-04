@@ -6,18 +6,17 @@ export const countPotionsColors = (potionsArr, colors) => {
 };
 
 export const getCombinations = (stock) => {
-  const copyStock = { ...stock };
   const colors = ["red", "blue", "green", "yellow", "grey"];
   const attacks = [];
 
-  getAttacks(copyStock, colors, attacks);
+  getAttacks(stock, colors, attacks);
 };
 
 const getAttacks = (stock, colorArr, attacksArr) => {
-  const attack = [];
   let totalAttacks = Math.max(...Object.values(stock));
+  const attack = [];
 
-  // Se usa i >= 5 pq siempre seran 5 colores
+  // Se usa i >= 5 pq siempre seran 5 colores.
   for (let i = 0; i <= 5; i++) {
     let color = colorArr[i];
     let quantity = stock[color];
@@ -26,16 +25,22 @@ const getAttacks = (stock, colorArr, attacksArr) => {
       stock[color] -= 1;
     } else {
       delete stock[colorArr[i]];
-      totalAttacks -= 1;
     }
   }
+  if (attack.length > 2) {
+    attacksArr.push(attack);
+  } else {
+    attack.forEach((value, index) => {
+      let spliceArr = attack.slice(index, index + 1);
+      attacksArr.push(spliceArr);
+    });
+  }
 
-  attacksArr.push(attack);
+  // TODO: Por alguna razon cuando valor de totalAttacks va disminuyendo de 2 en 2 y no acompaña a la propiedad con mayor valor del objeto
 
   if (totalAttacks > 0) {
     getAttacks(stock, colorArr, attacksArr);
   } else {
     console.log("attacksArr: ", attacksArr);
-    console.log("Done.");
   }
 };

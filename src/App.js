@@ -2,7 +2,17 @@ import "./App.css";
 import { countPotionsColors, getCombinations } from "./utils";
 
 function App() {
-  const potions = ["blue", "green", "red", "blue", "green", "yellow", "grey"];
+  const potions = [
+    "red",
+    "blue",
+    "blue",
+    "blue",
+    "green",
+    "yellow",
+    "yellow",
+    "grey",
+    "grey",
+  ];
 
   const stock = {
     red: 0,
@@ -13,9 +23,6 @@ function App() {
   };
 
   const potionsStock = { ...stock };
-
-  // Crear copia del stock aqui y pasarla en como parametro a getCombinations
-  // y borrar la copia del objeto en getComnations
 
   countPotionsColors(potions, potionsStock);
 
