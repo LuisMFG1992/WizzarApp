@@ -16,7 +16,7 @@ const getAttacks = (stock, colorArr, attacksArr) => {
   let totalAttacks = Math.max(...Object.values(stock));
   const attack = [];
 
-  // Se usa i >= 5 pq siempre seran 5 colores
+  // Se usa i >= 5 pq siempre seran 5 colores.
   for (let i = 0; i <= 5; i++) {
     let color = colorArr[i];
     let quantity = stock[color];

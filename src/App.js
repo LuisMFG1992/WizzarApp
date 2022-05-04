@@ -24,12 +24,7 @@ function App() {
 
   const potionsStock = { ...stock };
 
-  // Crear copia del stock aqui y pasarla en como parametro a getCombinations
-  // y borrar la copia del objeto en getComnations
-
   countPotionsColors(potions, potionsStock);
-
-  console.log("potionsStock: ", potionsStock);
 
   getCombinations(potionsStock);
 
