@@ -25,7 +25,6 @@ const getAttacks = (stock, colorArr, attacksArr) => {
       stock[color] -= 1;
     } else {
       delete stock[colorArr[i]];
-      totalAttacks -= 1;
     }
   }
   if (attack.length > 2) {
