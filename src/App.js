@@ -1,5 +1,5 @@
 import "./App.css";
-import { countPotionsColors, getCombinations } from "./utils";
+import { calculateDamage, countPotionsColors, getCombinations } from "./utils";
 
 function App() {
   const potions = [
@@ -32,7 +32,13 @@ function App() {
 
   countPotionsColors(potions, potionsStock);
 
-  getCombinations(potionsStock);
+  const attacksArr = getCombinations(potionsStock);
+
+  console.log("attacksArr: ", attacksArr);
+
+  const totalDamage = calculateDamage(attacksArr);
+
+  console.log(`Total Damage: ${totalDamage}`);
 
   return <div className="App">Hello World</div>;
 }

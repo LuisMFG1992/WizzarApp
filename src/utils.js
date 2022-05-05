@@ -10,6 +10,7 @@ export const getCombinations = (stock) => {
   const attacks = [];
 
   getAttacks(stock, colors, attacks);
+  return attacks;
 };
 
 const getAttacks = (stock, colorArr, attacksArr) => {
@@ -38,7 +39,35 @@ const getAttacks = (stock, colorArr, attacksArr) => {
 
   if (totalAttacks > 0) {
     getAttacks(stock, colorArr, attacksArr);
-  } else {
-    console.log("attacksArr: ", attacksArr);
   }
+};
+
+export const calculateDamage = (attacksArr) => {
+  let countElementsInAttacks = [];
+  attacksArr.forEach((element) => {
+    let countElements = element.length;
+    let attackPercentage;
+
+    switch (countElements) {
+      case 5:
+        attackPercentage = 25;
+        break;
+      case 4:
+        attackPercentage = 20;
+        break;
+      case 3:
+        attackPercentage = 10;
+        break;
+      default:
+        attackPercentage = 3;
+        break;
+    }
+
+    countElementsInAttacks.push(attackPercentage);
+  });
+
+  let counter = countElementsInAttacks.reduce((a, b) => a + b);
+  console.log("countElementsInAttacks: ", countElementsInAttacks);
+  return counter;
+  // console.log("counter: ", counter);
 };
