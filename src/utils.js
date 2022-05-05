@@ -36,8 +36,6 @@ const getAttacks = (stock, colorArr, attacksArr) => {
     });
   }
 
-  // TODO: Por alguna razon cuando valor de totalAttacks va disminuyendo de 2 en 2 y no acompaña a la propiedad con mayor valor del objeto
-
   if (totalAttacks > 0) {
     getAttacks(stock, colorArr, attacksArr);
   } else {
