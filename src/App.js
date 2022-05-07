@@ -1,24 +1,13 @@
 import "./App.css";
-import { calculateDamage, countPotionsColors, getCombinations } from "./utils";
+import { testCases } from "./components/testing/test";
+import {
+  calculateDamage,
+  countPotionsColors,
+  getBestCombinations,
+} from "./utils";
 
 function App() {
-  const potions = [
-    "red",
-    "blue",
-    "blue",
-    "green",
-    "green",
-    "green",
-    "yellow",
-    "yellow",
-    "yellow",
-    "yellow",
-    "grey",
-    "grey",
-    "grey",
-    "grey",
-    "grey",
-  ];
+  const potions = ["red", "red", "blue", "blue", "green", "yellow", "grey"];
 
   const stock = {
     red: 0,
@@ -32,13 +21,15 @@ function App() {
 
   countPotionsColors(potions, potionsStock);
 
-  const attacksArr = getCombinations(potionsStock);
+  const attacksArr = getBestCombinations(potionsStock);
 
   console.log("attacksArr: ", attacksArr);
 
   const totalDamage = calculateDamage(attacksArr);
 
   console.log(`Total Damage: ${totalDamage}`);
+
+  console.log(testCases());
 
   return <div className="App">Hello World</div>;
 }

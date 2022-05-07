@@ -5,19 +5,35 @@ export const countPotionsColors = (potionsArr, colors) => {
   return;
 };
 
-export const getCombinations = (stock) => {
+export const getBestCombinations = (stock) => {
   const colors = ["red", "blue", "green", "yellow", "grey"];
   const attacks = [];
+  const bestCombination = {
+    attacks: {},
+    totalDamage: 0,
+  };
 
-  getAttacks(stock, colors, attacks);
+  getAttacks(stock, colors, attacks, bestCombination);
+
   return attacks;
 };
 
-const getAttacks = (stock, colorArr, attacksArr) => {
+const getAttacks = (stock, colorArr, attacksArr, object) => {
+  // var bestCombination = {
+  //   attacks: [
+  //     {
+  //       potions: ["red"],
+  //       damage: 3
+  //     }
+  //   ],
+  //   totalDamage: 0
+  // }
+
   let totalAttacks = Math.max(...Object.values(stock));
   const attack = [];
 
   // Se usa i >= 5 pq siempre seran 5 colores.
+
   for (let i = 0; i <= 5; i++) {
     let color = colorArr[i];
     let quantity = stock[color];
@@ -44,6 +60,7 @@ const getAttacks = (stock, colorArr, attacksArr) => {
 
 export const calculateDamage = (attacksArr) => {
   let countElementsInAttacks = [];
+
   attacksArr.forEach((element) => {
     let countElements = element.length;
     let attackPercentage;
@@ -67,7 +84,6 @@ export const calculateDamage = (attacksArr) => {
   });
 
   let counter = countElementsInAttacks.reduce((a, b) => a + b);
-  console.log("countElementsInAttacks: ", countElementsInAttacks);
+  // console.log("countElementsInAttacks: ", countElementsInAttacks);x
   return counter;
-  // console.log("counter: ", counter);
 };
