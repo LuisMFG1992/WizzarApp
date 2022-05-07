@@ -7,7 +7,23 @@ import {
 } from "./utils";
 
 function App() {
-  const potions = ["red", "red", "blue", "blue", "green", "yellow", "grey"];
+  const potions = [
+    "red",
+    "blue",
+    "blue",
+    "green",
+    "green",
+    "green",
+    "yellow",
+    "yellow",
+    "yellow",
+    "yellow",
+    "grey",
+    "grey",
+    "grey",
+    "grey",
+    "grey",
+  ];
 
   const stock = {
     red: 0,
@@ -19,19 +35,16 @@ function App() {
 
   const potionsStock = { ...stock };
 
+  let bestCombination = {
+    attacks: [],
+    totalDamage: 0,
+  };
+
   countPotionsColors(potions, potionsStock);
 
-  const attacksArr = getBestCombinations(potionsStock);
+  getBestCombinations(potionsStock, bestCombination);
 
-  console.log("attacksArr: ", attacksArr);
-
-  const totalDamage = calculateDamage(attacksArr);
-
-  console.log(`Total Damage: ${totalDamage}`);
-
-  console.log(testCases());
-
-  return <div className="App">Hello World</div>;
+  return <div className="App">Hello Worl</div>;
 }
 
 export default App;
