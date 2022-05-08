@@ -11,7 +11,7 @@ export const testCases = () => {
   };
   const res = getBestCombinations(stockCaseOne);
 
-  console.log(res);
+  // console.log(res);
 
   return `Pass ${passedCases}/3 cases`;
 };

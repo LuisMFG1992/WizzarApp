@@ -25,8 +25,9 @@ const getAttacks = (stock, colorArr, attacksArr, bestCombination) => {
   for (let i = 0; i <= 5; i++) {
     let color = colorArr[i];
     let quantity = stock[color];
+    let combinationArr = objAttack.potions;
     if (quantity > 0) {
-      objAttack.potions.push(color);
+      combinationArr.push(color);
       stock[color] -= 1;
     } else {
       delete stock[colorArr[i]];
@@ -35,8 +36,19 @@ const getAttacks = (stock, colorArr, attacksArr, bestCombination) => {
 
   let attackLength = objAttack.potions.length;
 
-  let attackPercentage;
+  if (attackLength <= 2) {
+    let combinations = objAttack.potions;
+    combinations.forEach((potion) => {
+      let singleAttackObj = {
+        potions: [potion],
+        damage: 3,
+      };
+      bestCombination.totalDamage += 3;
+      bestCombination.attacks.push(singleAttackObj);
+    });
+  }
 
+  let attackPercentage;
   switch (attackLength) {
     case 5:
       attackPercentage = 25;
@@ -50,16 +62,20 @@ const getAttacks = (stock, colorArr, attacksArr, bestCombination) => {
     case 2:
       attackPercentage = 5;
       break;
-    default:
+    case 1:
       attackPercentage = 3;
+      break;
+    default:
       break;
   }
 
-  objAttack.damage = attackPercentage;
+  if (attackLength != 2) {
+    objAttack.damage = attackPercentage;
 
-  bestCombination.totalDamage += attackPercentage;
+    bestCombination.totalDamage += attackPercentage;
 
-  bestCombination.attacks.push(objAttack);
+    bestCombination.attacks.push(objAttack);
+  }
 
   if (totalAttacks > 0) {
     getAttacks(stock, colorArr, attacksArr, bestCombination);

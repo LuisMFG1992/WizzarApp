@@ -42,8 +42,7 @@ function App() {
 
   countPotionsColors(potions, potionsStock);
 
-  getBestCombinations(potionsStock, bestCombination);
-
+  const result = getBestCombinations(potionsStock, bestCombination);
   return <div className="App">Hello Worl</div>;
 }
 
