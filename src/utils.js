@@ -5,38 +5,44 @@ export const countPotionsColors = (potionsArr, colors) => {
   return;
 };
 
-export const getBestCombinations = (stock, bestCombination) => {
-  const colors = ["red", "blue", "green", "yellow", "grey"];
+export const getBestCombinations = (stock) => {
+  let bestCombination = {
+    attacks: [],
+    totalDamage: 0,
+  };
   const attacks = [];
 
-  getAttacks(stock, colors, attacks, bestCombination);
+  getAttacks(stock, attacks, bestCombination);
 
-  return attacks;
+  return bestCombination;
 };
 
-const getAttacks = (stock, colorArr, attacksArr, bestCombination) => {
-  let totalAttacks = Math.max(...Object.values(stock));
+const getAttacks = (stock, attacksArr, bestCombination) => {
+  const colors = ["red", "blue", "green", "yellow", "grey"];
 
+  //TODO: Maybe counting total potions and creating a conditional of (total & 8 === 0)
+  //TODO: i can do something with the 4x4 case.
+
+  let totalAttacks = Math.max(...Object.values(stock));
   const objAttack = {
     potions: [],
     damage: 0,
   };
 
   for (let i = 0; i <= 5; i++) {
-    let color = colorArr[i];
+    let color = colors[i];
     let quantity = stock[color];
     let combinationArr = objAttack.potions;
     if (quantity > 0) {
       combinationArr.push(color);
       stock[color] -= 1;
-    } else {
-      delete stock[colorArr[i]];
     }
   }
 
   let attackLength = objAttack.potions.length;
 
-  if (attackLength <= 2) {
+  //In case of 2 elements array this conditional will split and push them directly to my global obj.
+  if (attackLength === 2) {
     let combinations = objAttack.potions;
     combinations.forEach((potion) => {
       let singleAttackObj = {
@@ -48,28 +54,17 @@ const getAttacks = (stock, colorArr, attacksArr, bestCombination) => {
     });
   }
 
-  let attackPercentage;
-  switch (attackLength) {
-    case 5:
-      attackPercentage = 25;
-      break;
-    case 4:
-      attackPercentage = 20;
-      break;
-    case 3:
-      attackPercentage = 10;
-      break;
-    case 2:
-      attackPercentage = 5;
-      break;
-    case 1:
-      attackPercentage = 3;
-      break;
-    default:
-      break;
-  }
+  const ATTACK_PERCENTAGE = {
+    5: 25,
+    4: 20,
+    3: 10,
+    2: 5,
+    1: 3,
+  };
 
-  if (attackLength != 2) {
+  let attackPercentage = ATTACK_PERCENTAGE[attackLength];
+
+  if (attackLength !== 2) {
     objAttack.damage = attackPercentage;
 
     bestCombination.totalDamage += attackPercentage;
@@ -77,7 +72,7 @@ const getAttacks = (stock, colorArr, attacksArr, bestCombination) => {
     bestCombination.attacks.push(objAttack);
   }
 
-  if (totalAttacks > 0) {
-    getAttacks(stock, colorArr, attacksArr, bestCombination);
+  if (totalAttacks > 1) {
+    getAttacks(stock, attacksArr, bestCombination);
   }
 };

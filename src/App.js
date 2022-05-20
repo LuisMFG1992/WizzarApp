@@ -1,28 +1,35 @@
 import "./App.css";
 import { testCases } from "./components/testing/test";
-import {
-  calculateDamage,
-  countPotionsColors,
-  getBestCombinations,
-} from "./utils";
+import { countPotionsColors, getBestCombinations } from "./utils";
 
 function App() {
+  // const potions = [
+  //   "red", //1
+  //   "blue", //2
+  //   "blue", //3
+  //   "green", //4
+  //   "green", //5
+  //   "green", //6
+  //   "yellow", //7
+  //   "yellow", //8
+  //   "yellow", //9
+  //   "yellow", //10
+  //   "grey", //11
+  //   "grey", //12
+  //   "grey", //13
+  //   "grey", //14
+  //   "grey", //15
+  // ];
   const potions = [
-    "red",
-    "blue",
-    "blue",
-    "green",
-    "green",
-    "green",
-    "yellow",
-    "yellow",
-    "yellow",
-    "yellow",
-    "grey",
-    "grey",
-    "grey",
-    "grey",
-    "grey",
+    "red", //1
+    "red", //1
+    "blue", //2
+    "blue", //3
+    "green", //4
+    "green", //5
+    "yellow", //7
+    "yellow", //8
+    "grey", //11
   ];
 
   const stock = {
@@ -35,15 +42,12 @@ function App() {
 
   const potionsStock = { ...stock };
 
-  let bestCombination = {
-    attacks: [],
-    totalDamage: 0,
-  };
-
   countPotionsColors(potions, potionsStock);
 
-  const result = getBestCombinations(potionsStock, bestCombination);
-  return <div className="App">Hello Worl</div>;
+  const result = getBestCombinations(potionsStock);
+  console.log("result: ", result);
+  console.log(testCases());
+  return <div className="App">Hello World</div>;
 }
 
 export default App;
